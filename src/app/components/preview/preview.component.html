@@ -1,0 +1,53 @@
+
+<div class="container p-5">
+    <div class="row p-5">
+        <div class="col-md-2 d-none d-md-block">
+            <div class="bg-primary text-white p-4">
+                Archirecture de repertoire
+            </div>
+        </div>
+
+        
+        <div class="col-md-8">
+          <div class="p-2">
+            <h3>Folder Structure</h3>
+            <ul class="list-group">
+              <ng-container *ngFor="let item of folders">
+                <li class="list-group-item">
+                  <button *ngIf="item.fileName; else folderButton" class="btn btn-primary btn-sm float-right" (click)="downloadFolder(item.id)">Download File</button>
+                  <ng-template #folderButton>
+                    <button class="btn btn-primary btn-sm float-right" (click)="downloadFolder(item.id)">Download Folder</button>
+                  </ng-template>
+                  <!-- <a *ngIf="isFolder(item)" (click)="toggleSubfolders(item.id)">{{ item.fileName || item.folderName }}</a> -->
+                  <a *ngIf="isFolder(item)" (click)="toggleSubfolders(item.id)">
+                    {{ item.folderName }}
+                  </a>
+                  <a *ngIf="!isFolder(item)" >
+                    {{ item.fileName }}
+                  </a>
+
+                  
+                  <ul id="{{ item.id }}" class="list-group collapse">
+                    <ng-container *ngIf="item.subitems">
+                      <li *ngFor="let subitem of item.subitems" class="list-group-item">
+                        {{ subitem.fileName || subitem.folderName }}
+                      </li>
+                    </ng-container>
+                  </ul>
+                </li>
+              </ng-container>
+            </ul>
+          </div>
+          
+          </div>
+
+          
+
+        <div class="col-md-2 d-none d-md-block">
+            <div class="bg-primary text-white p-4">
+                Historique des modifications
+            </div>
+        </div>
+    </div>
+</div>
+
